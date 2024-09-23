@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionnaire Sar - Francais </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'mots/styles.css' %}" rel="stylesheet"> <!-- Lien vers le fichier CSS personnalisé -->
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0a0a0a;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background-color: #0a0a0a;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .nav-tabs {
+            position: sticky;
+            top: 60px;
+            background-color: #0a0a0a;
+            z-index: 999;
+        }
+        .nav-tabs .nav-link {
+            color: #ffffff;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .search-container {
+            margin-top: 20px;
+            position: sticky;
+            top: 120px;
+            background-color: #0a0a0a;
+            padding: 10px;
+            z-index: 998;
+        }
+        .search-input {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            border: 1px solid #00ffff;
+            padding: 10px;
+            width: 200px;
+            margin-right: 10px;
+        }
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background-color: #00b3b3;
+            color: #fff;
+            position: sticky;
+            top: 180px;
+            z-index: 997;
+        }
+        td {
+            background-color: #0f4c4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dictionnaire Sar - Francais </h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="dictionnaire-tab" data-bs-toggle="tab" href="#dictionnaire" role="tab" aria-controls="dictionnaire" aria-selected="true">Dictionnaire</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="entrainement-tab" data-bs-toggle="tab" href="#entrainement" role="tab" aria-controls="entrainement" aria-selected="false">Entraînement</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="dictionnaire" role="tabpanel" aria-labelledby="dictionnaire-tab">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Rechercher un mot..." onkeyup="filterTable()">
+                    <button class="search-button" onclick="filterTable()">Rechercher</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sar</th>
+                            <th>Française</th>
+                            <th>Type</th>
+                            <th>Phrase en Sar</th>
+                            <th>Traduction de la Phrase</th>
+                        </tr>
+                    </thead>
+                    <tbody id="motTable">
+                        {% for mot in mots %}
+                        <tr>
+                            <td>{{ mot.mot_sar }}</td>
+                            <td>{{ mot.mot_fr }}</td>
+                            <td>{{ mot.type_mot }}</td>
+                            <td>{{ mot.phrase_sar }}</td>
+                            <td>{{ mot.phrase_fr }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="entrainement" role="tabpanel" aria-labelledby="entrainement-tab">
+                <h2 class="text-center">Entraînement</h2>
+                <p class="text-center">Traduisez le mot suivant en français :</p>
+                <h2 class="text-center">{{ mot.mot_sar }}</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <input type="text" class="form-control" name="reponse" placeholder="Votre réponse">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Vérifier</button>
+                    </div>
+                </form>
+                <div class="result text-center">
+                    {% if correct %}
+                        <p>Bonne réponse !</p>
+                    {% elif request.method == 'POST' %}
+                        <p>Mauvaise réponse. La bonne réponse est : <strong>{{ mot.mot_fr }}</strong></p>
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'entrainement' %}" class="btn btn-primary">Essayez un autre mot</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('motTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let matched = false;
+                if (cells.length > 0) {
+                    const motFr = cells[1].textContent || cells[1].innerText; // Traduction française
+                    if (motFr.toLowerCase().indexOf(filter) > -1) {
+                        matched = true;
+                    }
+                }
+                rows[i].style.display = matched ? '' : 'none'; // Affiche ou cache la ligne
+            }
+        }
+    </script>
+</body>
+</html>
