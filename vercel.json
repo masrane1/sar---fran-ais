@@ -1,12 +1,12 @@
 {
   "builds": [
-    { "src": "manage.py", "use": "@vercel/python",
+    { "src": "dictionnaire/wsgi.py", "use": "@vercel/python",
     "config": {
       "maxLambdaSize": "15mb","runtime": "python3.9"
     }
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "manage.py" }
+    { "src": "/(.*)", "dest": "dictionnaire/wsgi.py" }
   ]
 }
