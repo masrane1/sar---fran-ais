@@ -1,12 +1,15 @@
 {
-  "builds": [
-    { "src": "dictionnaire/wsgi.py", "use": "@vercel/python",
+  "builds": [{
+    "src": "dictionnaire/dictionnaire/wsgi.py",
+    "use": "@vercel/python",
     "config": {
-      "maxLambdaSize": "250mb","runtime": "python3.12"
+      "maxLambdaSize": "250mb",
+      "runtime": "python3.12"
     }
-    }
-  ],
+    }],
+
   "routes": [
-    { "src": "/(.*)", "dest": "dictionnaire/wsgi.py" }
-  ]
+    { "src": "/(.*)",
+      "dest": "dictionnaire/dictionnaire/wsgi.py"
+    }]
 }
