@@ -1,141 +1,52 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns="http://www.w3.org/1999/html">
- {% load static %}
+<html lang="fr">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dictionnaire Sar-Français</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> <!-- Lien pour Bootstrap Icons -->
-
-
-    <style>
-        /* Custom styles for the header and footer */
-        .navbar {
-             background-color: #282c34; /* Couleur de fond de la navbar */
-           // background-color: #8B4513; /* Marron */
-        }
-        .navbar a {
-            color: white;
-        }
-        .header-title {
-            background-color: #CD853F; /* Marron plus clair */
-            padding: 20px;
-            text-align: center;
-            color: white;
-            font-size: 2em;
-        }
-        .container {
-            margin-top: 20px;
-        }
-        .gallery-item {
-            border-radius: 8px;
-            text-align: center;
-            background-color: #D2691E; /* Marron pour les titres */
-            color: white;
-            padding: 15px;
-        }
-        .scrollable-content {
-        max-height: 250px;  /* Limite la hauteur */
-        overflow-y: scroll; /* Active la barre de défilement verticale */
-        padding: 15px;
-        background-color: #f8f9fa; /* Fond léger pour démarquer la section */
-        border: 1px solid #dcdcdc; /* Bordure légère autour de la zone */
-        border-radius: 8px;
-    }
-         .navbar-brand {
-            color: #61dafb; /* Couleur de la marque */
-            font-size: 24px;
-            letter-spacing: 1px;
-        }
-         .navbar.fixed-top {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
-        }
-          .navbar-nav .nav-link {
-            color: #ffffff; /* Couleur des liens */
-            transition: color 0.3s; /* Effet de transition */
-        }
-           .navbar-nav .nav-link:hover {
-            color: #61dafb; /* Couleur au survol */
-        }
-
-        .navbar-toggler {
-            border-color: #61dafb; /* Couleur du bouton de bascule */
-        }
-
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' fill='%2361dafb'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='1.5' d='M3 15h24M3 7h24M3 23h24'/%3E%3C/svg%3E"); /* Icône de bascule personnalisée */
-        }
-         header {
-           // background-color: #5e3619;
-           // color: white;
-            //padding: 15px;
-            text-align: center;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #282c34; /* Couleur de fond sombre */
-            padding: 20px;
-            color: white;
-
-        }
-         h1 {
-            margin: 0;
-            font-size: 24px;
-            letter-spacing: 1px;
-        }
-
-        nav {
-            gap: 10px; /* Espacement entre les boutons */
-            display: flex;
-            margin-top: 10px;
-        }
-        nav button {
-            background-color: white;
-            color: black;
-            border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            cursor: pointer;
-        }
-
-        nav button:hover {
-            background-color: #ccc;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- header Bar -->
-    <header>
-        <h1><i class="bi bi-journal-bookmark"></i> Dictionnaire SAR - Français</h1>
-         <nav>
-            <button onclick="window.location.href='{% url 'index' %}'"><i class="bi bi-house"></i> Acceuil</button>
-            <button onclick="window.location.href='{% url 'apropos' %}'"><i class="bi bi-info-circle"></i> A propos</button>
-
-        </nav>
-    </header>
-
-    <!-- Main Content: A PROPOS Section -->
-   <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>A PROPOS</h2>
-            <div class="scrollable-content">
-                 <p>Sar est une langue Sara parlée au sud du Tchad dans les régions de Moyen-Chari et Mandoul. Selon Keegan (2013) la langue Sar est apparentée aux langues Saras Orientales: le Mbay, le Ngam, le Nar (peut-être un dialecte Sar) et le Daba. Selon Lewis, Simons et Fennig (2015), il y avait à peu près 183,000 locuteurs de Sar en 1993. Ce dictionnaire contient plus de 3050 mots, 3850 phrases illustratives, 350 expressions idiomatiques et 100 illustrations. Les informations sur la langue Sar ont été recueillies à N’Djaména au cours des étés 2010, 2011, 2012, 2013, 2014 et 2015 en travaillant avec Gotengaye Constant. Cet ouvrage repose sur le travail du Collège Charles Lwanga à Sarh, et surtout Palayer (1992) et Fournier (1976). Les illustrations sont de John Keegan et Laura Jean Poon. Ce travail a été rendu possible par des dons de National Endowment to the Humanities (FN-5007410, FN-5010412 et FN50134-14).</p>
-             <!-- Vous pouvez ajouter plus de contenu ici si nécessaire -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Dictionnaire SAR - Français</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}"><i class="bi bi-house"></i> Acceuil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'apropos' %}"><i class="bi bi-info-circle"></i> A propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'apropos' %}"><i class="bi bi-image"></i> Galerie</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="col-md-4">
-            <h2>Abréviations</h2>
-            <div class="scrollable-content">
-                <ul>
-    <li>Pr. - pronom</li>
+    </nav>
+
+    <!-- Main Content: A PROPOS Section -->
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>A PROPOS</h2>
+                <div class="border p-3 overflow-auto" style="max-height: 250px;">
+                    <p>Sar est une langue Sara parlée au sud du Tchad dans les régions de Moyen-Chari et Mandoul. Selon Keegan (2013) la langue Sar est apparentée aux langues Saras Orientales: le Mbay, le Ngam, le Nar (peut-être un dialecte Sar) et le Daba. Selon Lewis, Simons et Fennig (2015), il y avait à peu près 183,000 locuteurs de Sar en 1993. Ce dictionnaire contient plus de 3050 mots, 3850 phrases illustratives, 350 expressions idiomatiques et 100 illustrations. Les informations sur la langue Sar ont été recueillies à N’Djaména au cours des étés 2010, 2011, 2012, 2013, 2014 et 2015 en travaillant avec Gotengaye Constant. Cet ouvrage repose sur le travail du Collège Charles Lwanga à Sarh, et surtout Palayer (1992) et Fournier (1976). Les illustrations sont de John Keegan et Laura Jean Poon. Ce travail a été rendu possible par des dons de National Endowment to the Humanities (FN-5007410, FN-5010412 et FN50134-14).</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Abréviations</h2>
+                <div class="border p-3 overflow-auto" style="max-height: 250px;">
+                    <ul class="list-unstyled">
+                        <li>Pr. - pronom</li>
     <li>PrA - affixe pronominal</li>
     <li>qqc - quelque chose</li>
     <li>qqn - quelqu’un</li>
@@ -161,46 +72,38 @@
     <li>N. - nom</li>
     <li>Nin. - nom inaliénable</li>
     <li>NP. - nom propre</li>
-</ul>
-
+                        <!-- Autres abréviations ici -->
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 
     <!-- Galerie Section -->
-   <div class="container">
-    <h2 class="text-center">GALERIE</h2>
-    <div id="galerieCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="gallery-item">
-                    Avion<br>Nom en français
+    <div class="container mt-5">
+        <h2 class="text-center">GALERIE</h2>
+        <div id="galerieCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="text-center bg-warning p-3 rounded">Avion<br>Nom en français</div>
+                </div>
+                <div class="carousel-item">
+                    <div class="text-center bg-warning p-3 rounded">Voiture<br>Nom en français</div>
+                </div>
+                <div class="carousel-item">
+                    <div class="text-center bg-warning p-3 rounded">Maison<br>Nom en français</div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="gallery-item">
-                    Voiture<br>Nom en français
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="gallery-item">
-                    Maison<br>Nom en français
-                </div>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#galerieCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#galerieCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#galerieCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#galerieCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </button>
     </div>
-</div>
-
 
     <!-- Footer Section -->
     <footer class="text-center mt-5">
@@ -208,10 +111,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
